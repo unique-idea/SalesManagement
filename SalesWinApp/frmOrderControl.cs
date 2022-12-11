@@ -38,17 +38,14 @@ namespace SalesWinApp
             if (InsertOrUpdate)
             {
                 txtOrderID.Text = OrderInfo.OrderId.ToString();
-                cbMemberID.Text = OrderInfo.MemberId.ToString();               
+                txtOrderID.Enabled = false;              
+                ListMemberID.ForEach(memberID => cbMemberID.Items.Add(memberID));
+                cbMemberID.DropDownStyle = ComboBoxStyle.DropDownList;
+                cbMemberID.Text = OrderInfo.MemberId.ToString();
                 txtFreight.Text = OrderInfo.Freight.ToString();
                 dtOrderDate.Value = OrderInfo.OrderDate;
                 dtRequiredDate.Value = OrderInfo.RequiredDate;
                 dtShippedDate.Value = OrderInfo.ShippedDate;
-            }
-            else
-            {
-                ListMemberID.ForEach(memberID => cbMemberID.Items.Add(memberID));
-                cbMemberID.DropDownStyle = ComboBoxStyle.DropDownList;
-                cbMemberID.SelectedIndex = 0;
             }
             dataGridOrderInfo.DataSource = null;
             dataGridOrderInfo.DataSource = source;
@@ -100,7 +97,7 @@ namespace SalesWinApp
 
         private void btnCLose_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            Close();
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -134,7 +131,7 @@ namespace SalesWinApp
                     if (txtFreight.Text.Trim().Length != 0)
                     {
                         OrderRepository.UpdateOrder(order);
-                        MessageBox.Show("Update product successfully");
+                        MessageBox.Show("Update order successfully load agian to see changed!");
                         Close();
                     }
                     else
@@ -186,6 +183,11 @@ namespace SalesWinApp
             {
                 MessageBox.Show(ex.Message, "Deleting orderDetail failed");
             }
+        }
+
+        private void dataGridOrderInfo_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

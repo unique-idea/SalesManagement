@@ -63,7 +63,7 @@ namespace SalesWinApp
                 txtCategory.DataBindings.Add("Text", source, "CategoryID");
                 txtWeight.DataBindings.Add("Text", source, "Weight");
                 txtPrice.DataBindings.Add("Text", source, "UnitPrice");
-                txtUnitsInStock.DataBindings.Add("Text", source, "UnitsInStock");
+                txtUnitsInStock.DataBindings.Add("Text", source, "UnitInStock");
 
                 dataGridView1.DataSource = null;
                 dataGridView1.DataSource = source;
@@ -130,7 +130,7 @@ namespace SalesWinApp
                     CategoryId = int.Parse(txtProductID.Text),
                     Weight = txtWeight.Text,
                     UnitPrice = decimal.Parse(txtPrice.Text),
-                    UnitsInStock = int.Parse(txtUnitsInStock.Text),
+                    UnitInStock = int.Parse(txtUnitsInStock.Text),
                 };
             }
             catch (Exception ex)
@@ -194,7 +194,7 @@ namespace SalesWinApp
                         txtCategory.DataBindings.Add("Text", source, "CategoryID");
                         txtWeight.DataBindings.Add("Text", source, "Weight");
                         txtPrice.DataBindings.Add("Text", source, "UnitPrice");
-                        txtUnitsInStock.DataBindings.Add("Text", source, "UnitsInStock");
+                        txtUnitsInStock.DataBindings.Add("Text", source, "UnitInStock");
 
                         dataGridView1.DataSource = null;
                         dataGridView1.DataSource = source;
@@ -236,7 +236,7 @@ namespace SalesWinApp
                         txtCategory.DataBindings.Add("Text", source, "CategoryID");
                         txtWeight.DataBindings.Add("Text", source, "Weight");
                         txtPrice.DataBindings.Add("Text", source, "UnitPrice");
-                        txtUnitsInStock.DataBindings.Add("Text", source, "UnitsInStock");
+                        txtUnitsInStock.DataBindings.Add("Text", source, "UnitInStock");
 
                         dataGridView1.DataSource = null;
                         dataGridView1.DataSource = source;

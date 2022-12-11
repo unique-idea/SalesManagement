@@ -85,5 +85,10 @@ namespace SalesWinApp
             txtEmail.Text = string.Empty;
             txtPassword.Text = string.Empty;
         }
+
+        private void frmLogin_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

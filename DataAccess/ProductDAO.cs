@@ -34,7 +34,7 @@ namespace DataAccess
 
         public List<ProductObject> GetProducts()
         {
-            string SQLSelect = "SELECT ProductId, CategoryId, ProductName, Weight, UnitPrice, UnitsInStock FROM Product";
+            string SQLSelect = "SELECT ProductId, CategoryId, ProductName, Weight, UnitPrice, UnitInStock FROM Product";
             var products = new List<ProductObject>();
             IDataReader dataReader = null;
             try
@@ -49,7 +49,7 @@ namespace DataAccess
                         ProductName = dataReader.GetString(2),
                         Weight = dataReader.GetString(3),
                         UnitPrice = dataReader.GetDecimal(4),
-                        UnitsInStock = dataReader.GetInt32(5),
+                        UnitInStock = dataReader.GetInt32(5),
                     });
                 }
             }
@@ -70,7 +70,7 @@ namespace DataAccess
 
         public ProductObject GetProductWithID(int productID)
         {
-            string SQLSelect = "SELECT ProductId, CategoryId, ProductName, Weight, UnitPrice, UnitsInStock from Product WHERE ProductId = @ProductId";
+            string SQLSelect = "SELECT ProductId, CategoryId, ProductName, Weight, UnitPrice, UnitInStock from Product WHERE ProductId = @ProductId";
             ProductObject product = null;
             IDataReader dataReader = null;
             try
@@ -86,7 +86,7 @@ namespace DataAccess
                         ProductName = dataReader.GetString(2),
                         Weight = dataReader.GetString(3),
                         UnitPrice = dataReader.GetDecimal(4),
-                        UnitsInStock = dataReader.GetInt32(5),
+                        UnitInStock = dataReader.GetInt32(5),
                     };
                 }
             }
@@ -112,14 +112,14 @@ namespace DataAccess
                 ProductObject productByID = GetProductWithID(product.ProductId);
                 if (productByID == null)
                 {
-                    string SQLInsert = "INSERT Product VALUES(@ProductId, @CategoryId, @ProductName, @Weight, @UnitPrice, @UnitsInStock)";
+                    string SQLInsert = "INSERT Product VALUES(@ProductId, @CategoryId, @ProductName, @Weight, @UnitPrice, @UnitInStock)";
                     var parameters = new List<SqlParameter>();
                     parameters.Add(DataProvider.CreateParameter("@ProductId", 4, product.ProductId, DbType.Int32));
                     parameters.Add(DataProvider.CreateParameter("@CategoryId", 4, product.CategoryId, DbType.Int32));
                     parameters.Add(DataProvider.CreateParameter("@ProductName", 50, product.ProductName, DbType.String));
                     parameters.Add(DataProvider.CreateParameter("@Weight", 50, product.Weight, DbType.String));
                     parameters.Add(DataProvider.CreateParameter("@UnitPrice", 50, product.UnitPrice, DbType.Decimal));
-                    parameters.Add(DataProvider.CreateParameter("@UnitsInStock", 4, product.UnitsInStock, DbType.Int32));
+                    parameters.Add(DataProvider.CreateParameter("@UnitInStock", 4, product.UnitInStock, DbType.Int32));
                     DataProvider.Insert(SQLInsert, CommandType.Text, parameters.ToArray());
                 }
                 else
@@ -144,14 +144,14 @@ namespace DataAccess
                 ProductObject productByID = GetProductWithID(product.ProductId);
                 if (productByID != null)
                 {
-                    string SQLInsert = "UPDATE Product SET ProductId = @ProductId, CategoryId = @CategoryId, ProductName = @ProductName, Weight = @Weight, UnitPrice = @UnitPrice, UnitsInStock = @UnitsInStock WHERE ProductId = @ProductId";
+                    string SQLInsert = "UPDATE Product SET ProductId = @ProductId, CategoryId = @CategoryId, ProductName = @ProductName, Weight = @Weight, UnitPrice = @UnitPrice, UnitInStock = @UnitsInStock WHERE ProductId = @ProductId";
                     var parameters = new List<SqlParameter>();
                     parameters.Add(DataProvider.CreateParameter("@ProductId", 4, product.ProductId, DbType.Int32));
                     parameters.Add(DataProvider.CreateParameter("@CategoryId", 4, product.CategoryId, DbType.Int32));
                     parameters.Add(DataProvider.CreateParameter("@ProductName", 40, product.ProductName, DbType.String));
                     parameters.Add(DataProvider.CreateParameter("@Weight", 20, product.Weight, DbType.String));
                     parameters.Add(DataProvider.CreateParameter("@UnitPrice", 50, product.UnitPrice, DbType.Decimal));
-                    parameters.Add(DataProvider.CreateParameter("@UnitsInStock", 4, product.UnitsInStock, DbType.Int32));
+                    parameters.Add(DataProvider.CreateParameter("@UnitsInStock", 4, product.UnitInStock, DbType.Int32));
                     DataProvider.Insert(SQLInsert, CommandType.Text, parameters.ToArray());
                 }
                 else

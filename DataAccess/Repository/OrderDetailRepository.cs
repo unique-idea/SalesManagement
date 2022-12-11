@@ -13,6 +13,8 @@ namespace DataAccess.Repository
 
         public void DeleteOrderDetail(int orderID, int productID) => OrderDetailDAO.Instance.Remove(orderID, productID);
 
+        public List<OrderDetailObject> GetOrderDetailsWithOrderId(int orderID) => OrderDetailDAO.Instance.GetOrderDetailsWithOrderId(orderID);
+      
         public IEnumerable<OrderDetailObject> GetOrdersByOrderID(int orderID) => OrderDetailDAO.Instance.GetOrderDetailsWithOrderId(orderID);
 
         public void InsertOrderDetail(OrderDetailObject order) => OrderDetailDAO.Instance.Create(order);

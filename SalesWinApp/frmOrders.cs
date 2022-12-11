@@ -52,7 +52,9 @@ namespace SalesWinApp
             LoadOrders();
             GetProducts();
             GetUserIDs();
+            btnEdit.Enabled = true;
             dgvOrder.CellDoubleClick +=dgvOrder_CellDoubleClick;
+
         }
         public void LoadOrders()
         {
@@ -98,6 +100,7 @@ namespace SalesWinApp
         private void frmOrders_Load(object sender, EventArgs e)
         {
             btnDelete.Enabled = false;
+            btnEdit.Enabled = false;
             GetProducts();
             GetUserIDs();
         }
@@ -172,15 +175,26 @@ namespace SalesWinApp
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
+            OrderObject Order = new OrderObject
+            {
+                OrderId = int.Parse(txtOrderID.Text), 
+                MemberId = int.Parse(txtMemberID.Text), 
+                OrderDate =  dtOrderDate.Value, 
+                RequiredDate =  dtRequiredDate.Value,
+                ShippedDate =  dtShippedDate.Value,
+                Freight =  decimal.Parse(txtFreight.Text)
+            };
+
             frmOrderControl frmOrderControl = new frmOrderControl()
             {
                 Text = "Order",
-                InsertOrUpdate = false,
-                ListOrderDetail = new List<OrderDetailObject>(),
+                InsertOrUpdate = true,
+                ListOrderDetail = GetOrderDetail(int.Parse(txtOrderID.Text)),
                 ListMemberID = userIDs,
                 ListProduct = products,
                 OrderDetailRepository = OrderDetailRepository,
                 OrderRepository = OrderRepository,
+                OrderInfo = Order
             };
             if (frmOrderControl.ShowDialog() == DialogResult.OK)
             {
@@ -208,6 +222,12 @@ namespace SalesWinApp
                 source.Position = source.Count - 1;
 
             }
+        }
+
+        public List<OrderDetailObject> GetOrderDetail(int orderID)
+        {
+            List<OrderDetailObject> listDetail = OrderDetailRepository.GetOrderDetailsWithOrderId(orderID).ToList<OrderDetailObject>();
+            return listDetail;
         }
 
     }
